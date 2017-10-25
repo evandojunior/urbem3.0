@@ -1,0 +1,233 @@
+{% block body %}
+    {% block content %}
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td colspan="3" bgcolor="#c0c0c0"  width="641" valign="top" style="border: 1px solid #000000;">
+                    <p style="font-size: 10pt; text-align: center; padding-top: 7px;">NOTIFICAÇÃO DE DÍVIDA ATIVA – NDA 2/2016</p>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr valign="top">
+                <td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="font-size: 10pt; text-align: center; padding-top: 8px;"><i><b>Inscrição Nº</b></i></p>
+                </td>
+                <td colspan="2" width="534" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm">
+                    <p style="font-style: normal; font-weight: normal; padding-top: 7px; font-size: 10pt; text-align: center;">{{ inscricao }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="106" valign="top" style="border-top: none; border-bottom: none; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="font-size: 10pt; text-align: center; padding-top: 8px;"><i><b>Data</b></i></p>
+                </td>
+                <td colspan="2" width="534" valign="bottom" style="border-top: none; border-bottom: none; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm">
+                    <p style="font-style: normal; font-weight: normal; padding-top: 7px; font-size: 10pt; text-align: center;">{{ data }}</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="2" width="147" bgcolor="#c0c0c0" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="font-size: 12pt; text-align: center; padding-top: 9px;"><i><b>Valor total da dívida:</b></i></p>
+                </td>
+                <td width="494" bgcolor="#c0c0c0" style="border: 1px solid #000000; padding: 0cm">
+                        <p style="font-size: 12pt; text-align: left; padding-top: 10px; padding-left: 5px;">R$ {{ totalDivida|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p   style="margin-bottom: 0cm"><br/></p>
+
+        <table style="height: 252px;" width="100%" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <td style="border: 1px solid #000000; padding: 0cm;" colspan="11" valign="top" bgcolor="#c0c0c0" width="641">
+                    <p style="font-size: 10pt; text-align: left; padding-top: 8px;"><strong>Identifica&ccedil;&atilde;o:</strong></p>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr valign="top">
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="126">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">Devedor:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm;" colspan="9" width="515">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ contribuinte }}</strong></em></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="126">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">Inscri&ccedil;&atilde;o Municipal:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="3" width="187">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ inscricaoMunicipal }}</strong></em></p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="4" width="140">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">Inscri&ccedil;&atilde;o Econ&ocirc;mica:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm;" colspan="2" width="188">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ inscricaoEconomica }}</strong></em></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="126">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">Endere&ccedil;o:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm;" colspan="9" width="515">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ endereco }}</strong></em></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="126">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">Bairro:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="4" width="189">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ bairro }}</strong></em></p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="43">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">CEP: </p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm;" colspan="3" width="283">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ cep }}</strong></em></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" width="44">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">CPF:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="111">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt">{{ cpfCnpj }}</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" width="48">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">CGM:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="112">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt"><em><strong>{{ numcgm }}</strong></em></p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" width="28">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">RG:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" colspan="2" width="110">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt">{{ rg }}</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm;" width="106">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;">&Oacute;rg&atilde;o Emissor:</p>
+                </td>
+                <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm;" width="82">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt">{{ orgaoEmissor }}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p align="left" style=" font-style: normal; font-weight: normal"><br/></p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td style="border: 1px solid #000000; padding: 0cm;" colspan="11" valign="top" bgcolor="#c0c0c0" width="641">
+                    <p style="font-size: 10pt; text-align: left; padding-top: 8px;"><strong>Origem do débito tributário:</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td width="272" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Crédito</b></i></p>
+                </td>
+                <td width="69" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Valor original</b></i></p>
+                </td>
+                <td width="74" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Correção monetária</b></i></p>
+                </td>
+                <td width="79" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Juros</b></i></p>
+                </td>
+                <td width="73" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Multa</b></i></p>
+                </td>
+                <td width="74" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm">
+                    <p style="padding: 14px 0 0 0;  font-size: 10pt;"><i><b>Total</b></i></p>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr valign="top">
+                <td width="272" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ creditoOrigem }}</p>
+                </td>
+                <td width="69" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ valorOrigem|number_format(2, ',', '.') }}</p>
+                </td>
+                <td width="74" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ correcaoMonetaria|number_format(2, ',', '.') }}</p>
+                </td>
+                <td width="79" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ juros|number_format(2, ',', '.') }}</p>
+                </td>
+                <td width="73" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ multa|number_format(2, ',', '.') }}</p>
+                </td>
+                <td width="74" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">{{ total|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 0cm"><br/></p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr valign="top">
+                <td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">Valor da dívida tributária:</p>
+                </td>
+                <td width="50%" style="border: 1px solid #000000; padding: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">R${{ total|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+            </thead>
+        </table>
+        <p style="margin-bottom: 0cm"><br/></p>
+        <table width="100%" cellpadding="4" cellspacing="0">
+            <tr valign="top">
+                <td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 8pt">Valor Total Dívida Tributária:</p>
+                </td>
+                <td width="50%" style="border: 1px solid #000000; padding: 0.1cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">R$ {{ total|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td width="50%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">Valor Total Redução:</p>
+                </td>
+                <td width="50%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt">R$ {{ reducao|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td width="50%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt"><b>Valor Total Dívida:</b></p>
+                </td>
+                <td width="50%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                    <p style="padding: 16px 0 0 5px; font-size: 10pt"><b>R$ {{ totalDivida|number_format(2, ',', '.') }}</b></p>
+                </td>
+            </tr>
+        </table>
+        <p style=" font-style: normal; font-weight: normal">
+            <br/>
+        </p>
+        <p style="text-align: center; font-size: 8pt">, 14 de Junho de 2017.</p>
+        <p align="left" style=" font-style: normal; font-weight: normal"><br/></p>
+        <p style="text-align: center; font-style: normal; font-weight: normal; orphans: 2; widows: 2">______________________________</p>
+        <p style="margin-left: -0cm; margin-right: 0.02cm; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
+            <br/>
+            <br/>
+        </p>
+        <p align="left" style=" font-style: normal; font-weight: normal">
+            <br/>
+        </p>
+    {% endblock content %}
+{% endblock body %}
+
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('/bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css')) }}" media="screen, projection"/>
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="screen" type="text/css">
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="print" type="text/css">
+{% endblock stylesheets %}

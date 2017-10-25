@@ -1,0 +1,91 @@
+{% block body %}
+    {% block content %}
+        {% include 'FinanceiroBundle:Contabilidade/LancamentoContabil:GerarNota/headerPdf.html.twig' %}
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>{{ 'entidade'|trans }}</th>
+                    <td>{{ dadosEntidade.codEntidade ~ ' - ' ~ dadosEntidade.nomEntidade }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'label.lote.codLote'|trans }}</th>
+                    <td>{{ lote.codLote }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'label.lote.nomLote'|trans }}</th>
+                    <td>{{ lote.nomLote }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'label.lote.dtLote'|trans }}</th>
+                    <td>{{ lote.dtLote|date("d/m/Y") }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% if contaDebito is not empty %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="text-center">{{ 'label.lote.listaDebito'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>{{ 'label.lote.codConta'|trans }}</th>
+                        <th>{{ 'label.lote.codHistorico'|trans }}</th>
+                        <th>{{ 'label.lote.valor'|trans }}</th>
+                    </tr>
+                    {% for debito in contaDebito %}
+                        <tr>
+                            <td>{{ debito.conta }}</td>
+                            <td>{{ debito.historico }}</td>
+                            <td>{{ debito.valor|number_format_currency('BRL') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-right">{{ 'label.lote.valorTotal'|trans }}</td>
+                        <td>{{ total.totalDebito|number_format_currency('BRL') }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        {% endif %}
+
+        {% if contaCredito is not empty %}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th colspan="3" class="text-center">{{ 'label.lote.listaCredito'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>{{ 'label.lote.codConta'|trans }}</th>
+                    <th>{{ 'label.lote.codHistorico'|trans }}</th>
+                    <th>{{ 'label.lote.valor'|trans }}</th>
+                </tr>
+                {% for debito in contaCredito %}
+                    <tr>
+                        <td>{{ debito.conta }}</td>
+                        <td>{{ debito.historico }}</td>
+                        <td>{{ debito.valor|number_format_currency('BRL') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2" class="text-right">{{ 'label.lote.valorTotal'|trans }}</td>
+                    <td>{{ total.totalCredito|number_format_currency('BRL') }}</td>
+                </tr>
+                </tfoot>
+            </table>
+        {% endif %}
+    {% endblock content %}
+{% endblock body %}
+
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('/bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css')) }}" media="screen, projection"/>
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="screen" type="text/css">
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="print" type="text/css">
+{% endblock stylesheets %}

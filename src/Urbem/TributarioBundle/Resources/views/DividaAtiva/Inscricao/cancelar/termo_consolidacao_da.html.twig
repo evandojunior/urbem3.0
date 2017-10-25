@@ -1,0 +1,89 @@
+{% block body %}
+    {% block content %}
+        <p align="center" style="border: 1px solid #000000; padding-top: 0.04cm; padding-bottom: 0cm; padding-left: 0.14cm; padding-right: 0.14cm; background: #b3b3b3;">
+            <span style="font-size: 10pt">TERMO CONSOLIDAÇÃO – Nº {{ nrAcordoAdministrativo }}</span>
+        </p>
+        <p align="left"><br/></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">CONTRIBUINTE: {{ contribuinte }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">DOMICÍLIO FISCAL: {{ domicilioFiscal }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">C.P.F./C.N.P.J.: {{ cpfCnpj }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">INSCRIÇÃO IMOBILIÁRIA MUNICIPAL: {{ inscricaoMunicipal }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">INSCRIÇÃONO CADASTRO GERAL DE ATIVIDADES: {{ tipoInscricao }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">DATA DA NOTIFICACAO: {{ dtNotificacao }}</span></p>
+        <p style="font-size: 6pt"><span style="font-weight: bold;">ASSUNTO: </span>ACORDO ADMINISTRATIVO PENDENTE</p>
+        <br />
+        <p style="font-size: 6pt">Prezado(a) Contribuinte,</p>
+        <p style="text-align: justify;">
+            <p style="font-size: 6pt">
+                    Constam em nossos registros tributários e fiscais, a falta de pagamento
+                    da(s) parcela(s) abaixo discriminada(s), referente ao acordo
+                    administrativo <b>nº {{ nrAcordoAdministrativo }}</b>, realizado em <b>.</b>
+            </p>
+        <p align="justify"><br/></p>
+        <table width="680" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+            <tr valign="top">
+                <td bgcolor="#b3b3b3" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.12cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 14px;"><b>Cobrança</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border: 1px solid #000000; padding: 0cm 0.12cm">
+                    <p style="text-align: center; padding-top: 14px;"><b>Parcela</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border: 1px solid #000000; padding: 0cm 0.12cm">
+                    <p style="text-align: center; padding-top: 14px;"><b>Vencimento</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>Valor da Parcela</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>Situação</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>Data Pagamento</b></p>
+                </td>
+                <td bgcolor="#b3b3b3" style="border: 1px solid #000000; padding: 0.1cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>Valor Pago</b></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.12cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 14px;"><b></b></p>
+                </td>
+                <td style="border: 1px solid #000000; padding: 0cm 0.12cm">
+                    <p style="text-align: center; padding-top: 14px;"><b>{{ parcelas }}</b></p>
+                </td>
+                <td  style="border: 1px solid #000000; padding: 0cm 0.12cm">
+                    <p style="text-align: center; padding-top: 14px;"><b>{{ dtVencimento }}</b></p>
+                </td>
+                <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>{{ vlrParcela }}</b></p>
+                </td>
+                <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>{{ situacao }}</b></p>
+                </td>
+                <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>{{ dtPagamento }}</b></p>
+                </td>
+                <td style="border: 1px solid #000000; padding: 0.1cm">
+                    <p style="text-align: center; padding-top: 11px;"><b>{{ valorPago }}</b></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="3" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                    <p style="text-align: right; padding-top: 13px; padding-right: 5px;"><b>Valor Total das Parcelas</b></p>
+                </td>
+                <td colspan="4" style="border: 1px solid #000000; padding: 0.1cm">
+                    <p style="text-align: left; padding-top: 13px; padding-left: 5px;">{{ valorTotalParcelas|number_format(2, ',', '.') }}</p>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <p style="text-align: center;">_______________________________________________________</p>
+    {% endblock content %}
+{% endblock body %}
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('/bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css')) }}" media="screen, projection"/>
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="screen" type="text/css">
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="print" type="text/css">
+{% endblock stylesheets %}

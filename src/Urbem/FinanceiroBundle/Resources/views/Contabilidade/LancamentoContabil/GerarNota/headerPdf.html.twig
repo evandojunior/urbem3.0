@@ -1,0 +1,47 @@
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td rowspan="5" style="border-bottom: 0; border-left: 0; border-top: 0">
+            <img class="responsive-img" style="height: 65px; margin-top: 30px"
+                 src="http://urbem.cnm.org.br/bundles/portal/images/logo_urbem.png">
+        </td>
+        <th rowspan="5" colspan="6">
+            {{ dadosEntidade.nomEntidade }}<br />
+            {{ 'foneFax'|trans }}: {{ dadosEntidade.fone }}<br />
+            {{ 'email'|trans }}: {{ dadosEntidade.email }}<br />
+            {{ dadosEntidade.logradouro }}<br />
+            {{ 'cep'|trans }}: {{ dadosEntidade.cep }}<br />
+            {{ 'cnpj'|trans }}: {{ dadosEntidade.cnpj }}
+        </th>
+        <td>{{ modulo }}</td>
+        <td>
+            <span class="bold">{{ 'versao'|trans }}</span>
+            {{ versao }}
+        </td>
+    </tr>
+    <tr>
+        <td>{{ subModulo }}</td>
+        <td>
+            <span class="bold">{{ 'usuario'|trans }}</span>
+            {{ usuario.username }}
+        </td>
+    </tr>
+    <tr>
+        <td>{{ funcao }}</td>
+        <td>{{ nomRelatorio }}</td>
+    </tr>
+    <tr>
+        <td>
+            <span class="bold">{{ 'emissao'|trans }}:</span>
+            {{ emissaoDocumento|date('d/m/Y H:i:s') }}
+        </td>
+        <td>
+            <span class="bold">{{ 'hora'|trans }}:</span>
+            {{ emissaoDocumento|date("h:i:s") }}
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="divider">
+    <p></p>
+</div>

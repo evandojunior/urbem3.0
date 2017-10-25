@@ -1,0 +1,12 @@
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('bundles/core/css/tooltips.css') }}">
+{% endblock %}
+<div class="fixed-action-btn click-to-toggle" style="bottom: 25px; right: 2px;">
+    <a class="btn-floating blue darken-4 btn-large" href="#">
+        <i aria-hidden="true" class="large material-icons text-darken-4">menu</i>
+        <span class="sr-only">menu módulos</span>
+    </a>
+    <ul style="bottom: 50px !important;">
+        {{ listMenuModulesEnabled() }}
+    </ul>
+</div>

@@ -1,0 +1,340 @@
+{% block body %}
+    {% block content %}
+        {% include 'TributarioBundle::Imobiliario/Consulta/header.html.twig' %}
+        <h4>{{ 'label.imobiliarioImovel.dodosImovel'|trans|upper }}</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'label.imobiliarioImovel.inscricao'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.localizacao'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.lote'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.endereco'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.cep'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.proprietarios'|trans|upper }}</th>
+                    <th>{{ 'label.imobiliarioImovel.situacao'|trans|upper }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ imovel.inscricaoMunicipal }}</td>
+                    <td>{{ imovel.localizacao }}</td>
+                    <td>{{ imovel.lote }}</td>
+                    <td>{{ imovel.endereco }}</td>
+                    <td>{{ imovel.cep }}</td>
+                    <td>{{ imovel.fkImobiliarioProprietarios|join(', ') }}</td>
+                    <td>{{ admin.consultaSituacao(imovel)|join(', ') }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.imobiliarioImovel.fracaoIdealLote'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.areaTotalEdificada'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.areaEdificadaLote'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.dataInscricao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.condominio'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.creci'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ admin.consultaFracaoIdeal(imovel)|number_format(2, ',', '.') }}</td>
+                <td>{{ admin.consultaAreaImovel(imovel)|number_format(2, ',', '.') }}</td>
+                <td>{{ admin.consultaAreaImovelLote(imovel)|number_format(2, ',', '.') }}</td>
+                <td>{{ imovel.dtCadastro|date('d/m/Y') }}</td>
+                <td>{{ imovel.fkImobiliarioImovelCondominio }}</td>
+                <td>{% if imovel.fkImobiliarioImovelImobiliaria is not null %} {{ imovel.fkImobiliarioImovelImobiliaria.creci }} {% endif %}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaEdificacoes'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.codigo'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.tipoUnidade'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.tipoEdificacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.dataEdificacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.areaEdificacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.processo'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.situacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.dataBaixa'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.justificativa'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if imovel.fkImobiliarioUnidadeAutonomas|length %}
+                {% for unidadeAutonoma in imovel.fkImobiliarioUnidadeAutonomas|sort %}
+                    <tr>
+                        <td>{{ unidadeAutonoma.codConstrucao }}</td>
+                        <td>{{ unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioTipoEdificacao }}</td>
+                        <td>{{ 'label.imobiliarioConstrucao.autonoma'|trans }}</td>
+                        <td>{% if unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao %} {{ unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao.dataConstrucao|date('d/m/Y') }} {% endif %}</td>
+                        <td>{{ unidadeAutonoma.fkImobiliarioAreaUnidadeAutonomas.last.area|number_format(2, ',', '.') }}</td>
+                        <td>
+                            {% if unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioConstrucaoProcessos|length %}
+                                {{ unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioConstrucaoProcessos.last.fkSwProcesso }}
+                            {% endif %}
+                        </td>
+                        <td>{{ admin.consultaSituacaoConstrucao(unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao) }}</td>
+                        <td>
+                            {% if unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                {% for baixaConstrucao in unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                    {% if baixaConstrucao.dtTermino is null %}
+                                        {{ baixaConstrucao.dtInicio|date('d/m/Y') }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                {% for baixaConstrucao in unidadeAutonoma.fkImobiliarioConstrucaoEdificacao.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                    {% if baixaConstrucao.dtTermino is null %}
+                                        {{ baixaConstrucao.motivo }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if unidadeAutonoma.fkImobiliarioUnidadeDependentes|length %}
+                        {% for unidadeDependente in unidadeAutonoma.fkImobiliarioUnidadeDependentes|sort %}
+                            {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioConstrucaoOutros is null %}
+                                <tr>
+                                    <td>{{ unidadeDependente.codConstrucaoDependente }}</td>
+                                    <td>{{ unidadeDependente.fkImobiliarioConstrucao.tipoEdificacao }}</td>
+                                    <td>{{ 'label.imobiliarioConstrucao.dependente'|trans }}</td>
+                                    <td>{% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao %} {{ unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao.dataConstrucao|date('d/m/Y') }} {% endif %}</td>
+                                    <td>{{ unidadeDependente.fkImobiliarioAreaUnidadeDependentes.last.area|number_format(2, ',', '.') }}</td><td>
+                                        {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioConstrucaoProcessos|length %}
+                                            {{ unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioConstrucaoProcessos.last.fkSwProcesso }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ admin.consultaSituacaoConstrucao(unidadeDependente.fkImobiliarioConstrucao) }}</td>
+                                    <td>
+                                        {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                            {% for baixaConstrucao in unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                                {% if baixaConstrucao.dtTermino is null %}
+                                                    {{ baixaConstrucao.dtInicio|date('d/m/Y') }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                            {% for baixaConstrucao in unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                                {% if baixaConstrucao.dtTermino is null %}
+                                                    {{ baixaConstrucao.motivo }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaConstrucoes'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.codigo'|trans|upper }}</th>
+                <th>{{ 'label.descricao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.dataConstrucao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.areaConstrucao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.situacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.dataBaixa'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioConstrucao.justificativa'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if imovel.fkImobiliarioUnidadeAutonomas|length %}
+                {% for unidadeAutonoma in imovel.fkImobiliarioUnidadeAutonomas|sort %}
+                    {% if unidadeAutonoma.fkImobiliarioUnidadeDependentes|length %}
+                        {% for unidadeDependente in unidadeAutonoma.fkImobiliarioUnidadeDependentes|sort %}
+                            {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioConstrucaoOutros is not null %}
+                                <tr>
+                                    <td>{{ unidadeDependente.codConstrucaoDependente }}</td>
+                                    <td>{{ unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioConstrucaoOutros.descricao }}</td>
+                                    <td>{% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao %} {{ unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioDataConstrucao.dataConstrucao|date('d/m/Y') }} {% endif %}</td>
+                                    <td>{{ unidadeDependente.fkImobiliarioAreaUnidadeDependentes.last.area|number_format(2, ',', '.') }}</td>
+                                    <td>{{ admin.consultaSituacaoConstrucao(unidadeDependente.fkImobiliarioConstrucao) }}</td>
+                                    <td>
+                                        {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                            {% for baixaConstrucao in unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                                {% if baixaConstrucao.dtTermino is null %}
+                                                    {{ baixaConstrucao.dtInicio|date('d/m/Y') }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|length %}
+                                            {% for baixaConstrucao in unidadeDependente.fkImobiliarioConstrucao.fkImobiliarioBaixaConstrucoes|sort %}
+                                                {% if baixaConstrucao.dtTermino is null %}
+                                                    {{ baixaConstrucao.motivo }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaProprietarios'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.cgm'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.quota'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proprietario in imovel.fkImobiliarioProprietarios %}
+                {% if proprietario.promitente == false %}
+                <tr>
+                    <td>{{ proprietario.fkSwCgm }}</td>
+                    <td>{{ proprietario.cota|number_format(2, ',', '.') }}%</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaPromitentes'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.cgm'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.quota'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proprietario in imovel.fkImobiliarioProprietarios %}
+                {% if proprietario.promitente == true %}
+                    <tr>
+                        <td>{{ proprietario.fkSwCgm }}</td>
+                        <td>{{ proprietario.cota|number_format(2, ',', '.') }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaConfrontacoes'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.imobiliarioLote.pontoCardeal'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioLote.tipo'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioLote.descricao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioLote.extensao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioLote.testada'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ imovel.fkImobiliarioImovelConfrontacao.fkImobiliarioConfrontacaoTrecho.fkImobiliarioConfrontacao.fkImobiliarioPontoCardeal }}</td>
+                <td>{{ 'label.imobiliarioLote.trecho'|trans }}</td>
+                <td>{{ imovel.fkImobiliarioImovelConfrontacao.fkImobiliarioConfrontacaoTrecho.fkImobiliarioTrecho }}</td>
+                <td>{{ imovel.fkImobiliarioImovelConfrontacao.fkImobiliarioConfrontacaoTrecho.fkImobiliarioConfrontacao.fkImobiliarioConfrontacaoExtensoes.last.valor|number_format(2, ',', '.') }}</td>
+                <td>{% if imovel.fkImobiliarioImovelConfrontacao.fkImobiliarioConfrontacaoTrecho.principal %} {{ 'label_type_yes'|trans }} {% else %} {{ 'label_type_no'|trans }} {% endif %}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaTransferencias'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.imobiliarioTransferenciaPropriedade.naturezaTransferencia'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioTransferenciaPropriedade.processo'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioTransferenciaPropriedade.dataEfetivacao'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioTransferenciaPropriedade.creci'|trans|upper }}</th>
+                <th>{{ 'label.observacao'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tranferencia in imovel.fkImobiliarioTransferenciaImoveis %}
+                {% if tranferencia.fkImobiliarioTransferenciaEfetivacao %}
+                <tr>
+                    <td>{{ tranferencia.fkImobiliarioNaturezaTransferencia }}</td>
+                    <td>{{ tranferencia.fkImobiliarioTransferenciaProcesso }}</td>
+                    <td>{{ tranferencia.fkImobiliarioTransferenciaEfetivacao.dtEfetivacao|date('d/m/Y') }}</td>
+                    <td>{% if tranferencia.fkImobiliarioTransferenciaCorretagem %}{{ tranferencia.fkImobiliarioTransferenciaCorretagem.creci }}{% endif %}</td>
+                    <td>{{ tranferencia.fkImobiliarioTransferenciaEfetivacao.observacao }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.listaExProprietarios'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.cgm'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioImovel.quota'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proprietario in imovel.fkImobiliarioExProprietarios %}
+                <tr>
+                    <td>{{ proprietario.fkSwCgm }}</td>
+                    <td>{{ proprietario.cota|number_format(2, ',', '.') }}%</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>{{ 'label.imobiliarioImovel.condominio'|trans|upper }}</h4>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'label.codigo'|trans|upper }}</th>
+                <th>{{ 'label.nome'|trans|upper }}</th>
+                <th>{{ 'label.tipo'|trans|upper }}</th>
+                <th>{{ 'label.cgm'|trans|upper }}</th>
+                <th>{{ 'label.imobiliarioCondominio.areaTotalComum'|trans|upper }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if imovel.fkImobiliarioImovelCondominio %}
+                <tr>
+                    <td>{{ imovel.fkImobiliarioImovelCondominio.codCondominio }}</td>
+                    <td>{{ imovel.fkImobiliarioImovelCondominio.fkImobiliarioCondominio.nomCondominio }}</td>
+                    <td>{{ imovel.fkImobiliarioImovelCondominio.fkImobiliarioCondominio.fkImobiliarioTipoCondominio }}</td>
+                    <td>{{ imovel.fkImobiliarioImovelCondominio.fkImobiliarioCondominio.fkImobiliarioCondominioCgns|join(', ') }}</td>
+                    <td>{{ imovel.fkImobiliarioImovelCondominio.fkImobiliarioCondominio.fkImobiliarioCondominioAreaComuns.last.areaTotalComum|number_format(2, ',', '.') }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+    {% endblock content %}
+{% endblock body %}
+
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('/bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css')) }}" media="screen, projection"/>
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="screen" type="text/css">
+    <link href="{{ absolute_url(asset('/bundles/core/css/relatorio.css')) }}" rel="stylesheet" media="print" type="text/css">
+{% endblock %}

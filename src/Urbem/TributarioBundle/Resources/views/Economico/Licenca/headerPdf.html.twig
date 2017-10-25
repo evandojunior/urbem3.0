@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td rowspan="5">
+                {% if infoLicencaAtividade.logoTipo is defined %}
+                    <img class="responsive-img" style="height: 65px; margin-top: 20px"
+                         src="{{ infoLicencaAtividade.logoTipo }}">
+                {% endif %}
+            </td>
+            <td class="text-center" style="line-height: 1.1;">
+                <p>
+                    <small style="font-weight: bold;">{{ "label.economico.licenca.licencaPdf.estadoDe" | trans }} {{ infoLicencaAtividade.infoEstado }}</small>
+                    <div style="height: 1px; border-bottom: 1px solid #e2e2e2; margin-bottom: 4px;"></div>
+                    <small>{{ infoLicencaAtividade.infoPrefeitura }}</small><br />
+                    <small>{{ infoLicencaAtividade.infoSecretaria }}</small><br />
+                    <div style="margin-top: 5px;">
+                        <strong>{{ "label.cnpj" | trans }}</strong> {{ infoLicencaAtividade.cnpjSecretaria }}
+                    </div>
+                </p>
+            </td>
+            <td style="line-height: 1.5;">
+                <span class="bold"><small>{{ "versao" | trans }}: </small></span>{{ infoLicencaAtividade.versao }}
+                <div style="height: 1px; border-bottom: 1px solid #e2e2e2; margin-top: 2px; margin-bottom: 4px;"></div>
+                <span class="bold"><small>{{ "label.exercicio" | trans }}: </small></span><strong>{{ infoLicencaAtividade.exercicio }}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="text-center" style="line-height: 1.1;">
+                <h3 style="text-transform: uppercase; font-weight: bold; margin-top: -5px; margin-bottom: -1px;">{{ infoLicencaAtividade.infoTipoAlvara }}</h3>
+                <small>{{ infoLicencaAtividade.infoTipoAlvaraDesc }}</small>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="divider"><p></p></div>

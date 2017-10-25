@@ -1,0 +1,46 @@
+{% extends "CoreBundle::Sonata/standard_layout.html.twig" %}
+
+{% block list_table %}
+<div class="row">
+    <div>
+        <table class="bordered highlight">
+            <thead>
+            <tr class="sonata-ba-list-field-header">
+                <th class="sonata-ba-list-field-header-integer  sonata-ba-list-field-header-order-asc sonata-ba-list-field-order-active">Contribuinte</th>
+                <th class="sonata-ba-list-field-header-integer  sonata-ba-list-field-header-order-asc sonata-ba-list-field-order-active">Cobrança/Ano</th>
+                <th class="sonata-ba-list-field-header-integer  sonata-ba-list-field-header-order-asc sonata-ba-list-field-order-active">Documento</th>
+                <th class="sonata-ba-list-field-header-integer  sonata-ba-list-field-header-order-asc sonata-ba-list-field-order-active">Emissão</th>
+                <th class="sonata-ba-list-field-header-integer  sonata-ba-list-field-header-order-asc sonata-ba-list-field-order-active"></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for registro in admin.registros %}
+                    <tr>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-integer">{{ registro['numcgm'] ~ ' - ' ~ registro['nom_cgm'] }}</td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {% if registro['exercicio_cobranca'] | trim != '-1' %}
+                                {{ registro['exercicio_cobranca'] }}
+                            {% endif %}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">{{ registro['nome_documento'] }}</td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">{{ registro['data_emissao'] }}</td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-actions">
+                            <div class="btn-group">
+                                <a href="{{ path('tributario_divida_ativa_inscricao_cancelar_emitir_documento', {'_id': registro['cod_inscricao_divida_ativa'] ~ '-' ~ registro['exercicio_divida_ativa'] ~ ' - ' ~ registro['nome_arquivo_agt'] }) }}" class="blue-text text-darken-4 transparent z-depth-0 hide-on-med-and-down tooltipped btn-list" title="">
+                                    <i class="fa fa-print fa-lg" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="box-footer">
+            <div class="clearfix form-inline">
+                <div class="pull-left">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+services:
+    portal_servicos.admin.usuario:
+        class: Urbem\PortalServicosBundle\Resources\config\Sonata\UsuarioAdmin
+        arguments: [~, Urbem\CoreBundle\Entity\Administracao\Usuario, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Usuario }
